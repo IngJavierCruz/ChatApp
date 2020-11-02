@@ -21,7 +21,7 @@ export class ChatService {
   sendMessage(message: string) {
     
     const payload = {
-      autor: 'Javier Cruz',
+      autor: this.webSocketService.getUser().name,
       message: message
     };
 
@@ -33,6 +33,11 @@ export class ChatService {
 
   getMessage() {
     return this.webSocketService.listen('new-message');
+  }
+
+
+  getMessagePrivate() {
+    return this.webSocketService.listen('message-private');
   }
 
 }

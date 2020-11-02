@@ -17,6 +17,14 @@ import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 // COMPONETS
 import { FooterComponent } from './features/footer/footer.component';
 import { ChatComponent } from './features/chat/chat.component';
+import { ListUsersComponent } from './features/list-users/list-users.component';
+import { LoginComponent } from './pages/login/login.component';
+import { MessagesComponent } from './pages/messages/messages.component';
+
+
+// ROUTE MODULE
+import { AppRoutingModule } from './app-routing.module';
+
 
 const config: SocketIoConfig = {
   url: environment.urlServerSocket, 
@@ -29,12 +37,16 @@ const config: SocketIoConfig = {
   declarations: [
     AppComponent,
     FooterComponent,
-    ChatComponent
+    ChatComponent,
+    ListUsersComponent,
+    LoginComponent,
+    MessagesComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    SocketIoModule.forRoot(config)
+    SocketIoModule.forRoot(config),
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
