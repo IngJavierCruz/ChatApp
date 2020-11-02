@@ -1,37 +1,38 @@
 // ANGULAR
 import { Injectable } from '@angular/core';
+import { WebSocketService } from '../web-socket/web-socket.service';
 
-// SOCKET
-import { Socket } from 'ngx-socket-io';
- 
+
+
 @Injectable({
   providedIn: 'root'
 })
-export class ChatService {
+export class ChatService { 
 
-  private socketStatus = false;
-
-  constructor(private socket: Socket) { 
-    this.checkStatus();
-  }
-
-
-
-  checkStatus() {
-
-    this.socket.on('connect', () => {
-      console.log('Connected to server');
-      this.socketStatus = true;
-    });
-
-
-    this.socket.on('disconnect', () => {
-      console.log('Disconected to server');
-      this.socketStatus = false;
-    });
+  constructor(
+    public webSocketService: WebSocketService
+  ) {
 
 
   }
 
+
+
+  sendMessage(message: string) {
+    
+    const payload = {
+      autor: 'Javier Cruz',
+      message: message
+    };
+
+
+    this.webSocketService.emit('message', payload);
+
+  }
+
+
+  getMessage() {
+    return this.webSocketService.listen('new-message');
+  }
 
 }

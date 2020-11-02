@@ -1,7 +1,9 @@
 // ANGULAR
 import { Component, OnDestroy, OnInit } from '@angular/core';
 
-import { ChatService } from './core/services/chat/chat.service'
+
+// SERVICES
+import { WebSocketService } from './core/services/web-socket/web-socket.service';
 
  
 @Component({
@@ -9,17 +11,17 @@ import { ChatService } from './core/services/chat/chat.service'
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit {
+export class AppComponent  {
   
   title = 'chatApp';
 
-  constructor(public chatService: ChatService) {
+  constructor(
+    public webSocketService: WebSocketService
+    ) {
 
   }
 
 
-  ngOnInit(): void {
-  }
 
 
 
