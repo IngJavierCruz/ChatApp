@@ -40,4 +40,14 @@ export class ChatService {
     return this.webSocketService.listen('message-private');
   }
 
+
+  getActiveUsers() {
+    return this.webSocketService.listen('active-users');
+  }
+
+
+  emitActiveUsers() {
+    this.webSocketService.emit('get-users');
+  }
+ 
 }

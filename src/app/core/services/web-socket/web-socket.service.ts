@@ -1,5 +1,6 @@
 // ANGULAR
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 
 // SOCKET
 import { Socket } from 'ngx-socket-io';
@@ -20,7 +21,8 @@ export class WebSocketService {
 
 
   constructor(
-    private socket: Socket
+    private socket: Socket,
+    private router: Router
     ) { 
     this.checkStatus();
     this.loadStorage();
@@ -33,6 +35,7 @@ export class WebSocketService {
     this.socket.on('connect', () => {
       console.log('Connected to server');
       this.socketStatus = true;
+      this.loadStorage();
     });
 
 
@@ -74,9 +77,25 @@ export class WebSocketService {
   }
 
 
+  logout() {
+    this.user = null;
+    localStorage.removeItem('user');
+    const payload = {
+      name: 'Anónimo'
+    };
+
+    this.emit('config-user', payload, () => {});
+    this.router.navigateByUrl('/');
+
+
+  }
+
+
   saveStorage(user: User) {
     localStorage.setItem('user', JSON.stringify(user));
   }
+
+
 
   loadStorage() {
 
